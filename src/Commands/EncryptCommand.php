@@ -101,7 +101,7 @@ class EncryptCommand extends Command
                             'indexable_id' => $model[$newClass->getKeyName()],
                             'name' => $name,
                         ], [
-                            'value' => $value,
+                            'value' => $value['value'],
                         ]);
                     }
 
