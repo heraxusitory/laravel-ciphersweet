@@ -91,7 +91,7 @@ trait UsesCipherSweet
         string $indexName,
         string|array $value
     ): Builder {
-        return $query->whereExists(fn (QueryBuilder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
+        return $query->whereExists(fn (QueryBuilder $query): QueryBuilder => $this->buildBlindQuery($query, $column, $indexName, $value));
     }
 
     public function scopeOrWhereBlind(
@@ -100,7 +100,7 @@ trait UsesCipherSweet
         string $indexName,
         string|array $value
     ): Builder {
-        return $query->orWhereExists(fn (QueryBuilder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
+        return $query->orWhereExists(fn (QueryBuilder $query): QueryBuilder => $this->buildBlindQuery($query, $column, $indexName, $value));
     }
 
     public function excludeNonChangedEncryptedAttributesFromChanges(): self
