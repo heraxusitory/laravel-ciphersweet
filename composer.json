@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/contracts": "^8.0",
-        "paragonie/ciphersweet": "v3.x-dev",
+        "paragonie/ciphersweet": "v4.8.0",
         "spatie/laravel-package-tools": "^1.12.0"
     },
     "require-dev": {
