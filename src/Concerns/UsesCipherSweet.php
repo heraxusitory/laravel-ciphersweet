@@ -146,6 +146,6 @@ trait UsesCipherSweet
             ->where('indexable_type', $this->getMorphClass())
             ->where('indexable_id', DB::raw($this->getTable() . '.' . $this->getKeyName()))
             ->where('name', $indexName)
-            ->where('value', static::$cipherSweetEncryptedRow->getBlindIndex($indexName, [$column => $value]));
+            ->where('value', static::$cipherSweetEncryptedRow->getBlindIndex($indexName, [$column => $value])['value']);
     }
 }
