@@ -2,7 +2,8 @@
 
 namespace Spatie\LaravelCipherSweet\Concerns;
 
-use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\DB;
 use ParagonIE\CipherSweet\CipherSweet as CipherSweetEngine;
 use ParagonIE\CipherSweet\EncryptedRow;
@@ -85,7 +86,7 @@ trait UsesCipherSweet
         string $indexName,
         string|array $value
     ): Builder {
-        return $query->whereExists(fn (Builder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
+        return $query->whereExists(fn (QueryBuilder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
     }
 
     public function scopeOrWhereBlind(
@@ -94,7 +95,7 @@ trait UsesCipherSweet
         string $indexName,
         string|array $value
     ): Builder {
-        return $query->orWhereExists(fn (Builder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
+        return $query->orWhereExists(fn (QueryBuilder $query): Builder => $this->buildBlindQuery($query, $column, $indexName, $value));
     }
 
     public function excludeNonChangedEncryptedAttributesFromChanges(): self
@@ -130,11 +131,11 @@ trait UsesCipherSweet
     }
 
     private function buildBlindQuery(
-        Builder $query,
+        QueryBuilder $query,
         string $column,
         string $indexName,
         string|array $value
-    ): Builder {
+    ): QueryBuilder {
         return $query->select(DB::raw(1))
             ->from('blind_indexes')
             ->where('indexable_type', $this->getMorphClass())

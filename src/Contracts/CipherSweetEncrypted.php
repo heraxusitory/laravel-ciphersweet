@@ -2,7 +2,7 @@
 
 namespace Spatie\LaravelCipherSweet\Contracts;
 
-use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use ParagonIE\CipherSweet\EncryptedRow;
 
 /** @mixin \Illuminate\Database\Eloquent\Model */
